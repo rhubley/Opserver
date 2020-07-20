@@ -1,17 +1,70 @@
 ﻿{
   "ForwardedHeaders": {
-    "KnownNetworks": ["10.0.0.0/16"],
+    "KnownNetworks": [],
     "KnownProxies": [],
     "ForwardedHeaders": "All"
+  },
+  "Security": {
+    "Provider": "EveryonesAnAdmin"
   },
   "Modules": {
     /* Configuration for the SQL Server dashboard */
     "Sql": {
-      //"defaultConnectionString": "Data Source=$ServerName$;Initial Catalog=master;Integrated Security=SSPI;",
-      //"refreshIntervalSeconds": 30,
-      //"instances": [
-      //  { "name": "localhost" }
-      //]
+      "defaultConnectionString": "Data Source=$ServerName$;Initial Catalog=master;Integrated Security=SSPI;",
+      "refreshIntervalSeconds": 30,
+      "instances": [
+        { "name": "SQLMLDEV", "description" : "SQLMLDEV" },
+        { "name": "SQLADCBIDEV", "description" : "" },
+        { "name": "SQLADCBIUAT", "description" : "" },
+        { "name": "SQLPDCBIPRD", "description" : "" },
+        { "name": "SQLPDCFRPP", "description" : "" },
+        { "name": "YHZADCSQL67", "description" : "" },
+        { "name": "YHZADCSQL48", "description" : "SQLJZCDEV" },
+        //{ "name": "YHZPDCSQL40", "description" : "" },
+        { "name": "YHZADCSQL66", "description" : "SQLADCFRPTEST" },
+        { "name": "YHZPDCSQL24", "description" : "SQLPDCJZCPRD" }
+      ]
+    },
+    "Dashboard": {
+      "Providers": {
+        "bosun": {
+          "host": "http://localhost:8070",
+          "apiKey": "IAmALittleApiKeyShortAndStout"
+
+        }
+      },
+      "categories": [
+        {
+          "name": "Database Servers", // Name for this group of servers
+          "pattern": "sql", // Regex pattern of server names to put in this group
+          "cpuWarningPercent": 20, // How much CPU usage before a node is treated as a warning (defaults to the setting above if not specified)
+          "cpuCriticalPercent": 60, // How much CPU usage before a node is treated as critical (defaults to the setting above if not specified)
+          "memoryWarningPercent": 98, // How much memory usage before a node is treated as a warning (defaults to the setting above if not specified)
+          "memoryCriticalPercent": 99.2 // How much memory usage before a node is treated as critical (defaults to the setting above if not specified)
+          //"primaryInterfacePattern": "-TEAM$" // (If the provider supports it) Regex pattern of interface names to treat as "primary" (shown in the dashboard aggregates)
+        },
+        {
+          "name": "Web Servers",
+          "pattern": "web",
+          "cpuWarningPercent": 25,
+          "memoryWarningPercent": 75
+          //"primaryInterfacePattern": "-TEAM$|-TEAM · Local"
+        },
+        {
+          "name": "ESX Hosts",
+          "pattern": "ESX",
+          "cpuWarningPercent": 25,
+          "memoryWarningPercent": 75
+          //"primaryInterfacePattern": "-TEAM$|-TEAM · Local"
+        },
+        {
+          "name": "XenApp Servers",
+          "pattern": "XA",
+          "cpuWarningPercent": 25,
+          "memoryWarningPercent": 75
+          //"primaryInterfacePattern": "-TEAM$|-TEAM · Local"
+        }
+      ]
     },
     /* Configuration for the Redis dashboard */
     "Redis": {
@@ -38,13 +91,29 @@
     },
     /* Configuration for the Exceptions dashboard */
     "Exceptions": {
-      //"stores": [
-      //  {
-      //    "name": "Local",
-      //    "queryTimeoutMs": 2000,
-      //    "connectionString": "Server=.;Database=Local.Exceptions;Integrated Security=SSPI;"
-      //  }
-      //],
+      "groups": [
+        {
+          "name": "CoreDev",
+          "applications": [
+            "Core",
+            "Status"
+          ]
+        },
+        {
+          "name": "HR",
+          "applications": [
+            "Core",
+            "Status"
+          ]
+        }
+      ],
+      "stores": [
+        {
+          "name": "Local",
+          "queryTimeoutMs": 2000,
+          "connectionString": "Server=SQLPDCJZCPRD;Database=Exceptional;Integrated Security=SSPI;"
+        }
+      ],
       "stackTraceReplacements": [
         {
           "name": "github",

@@ -7,6 +7,9 @@
     <DebugType>embedded</DebugType>
   </PropertyGroup>
   <ItemGroup>
+    <FrameworkReference Include="Microsoft.AspNetCore.App" />
+  </ItemGroup>
+  <ItemGroup>
     <PackageReference Include="Dapper" Version="2.0.30" />
     <PackageReference Include="Enums.NET" Version="3.0.2" />
     <PackageReference Include="Jil" Version="2.17.0" />
@@ -15,11 +18,13 @@
     <PackageReference Include="Microsoft.Extensions.Hosting.Abstractions" Version="3.1.0" />
     <PackageReference Include="MiniProfiler.Shared" Version="4.1.0" />
     <PackageReference Include="Sigil" Version="5.0.0" />
+    <PackageReference Include="StackExchange.Exceptional.AspNetCore" Version="2.1.0" />
     <PackageReference Include="StackExchange.Exceptional.Shared" Version="2.1.0" />
     <PackageReference Include="StackExchange.Redis" Version="2.1.55" />
     <PackageReference Include="StackExchange.Utils.Http" Version="0.3.2" />
     <PackageReference Include="System.Data.SqlClient" Version="4.8.0" />
     <PackageReference Include="System.DirectoryServices" Version="4.7.0" />
+    <PackageReference Include="System.DirectoryServices.AccountManagement" Version="4.7.0" />
     <PackageReference Include="System.Management" Version="4.7.0" />
     <PackageReference Include="System.Runtime.Caching" Version="4.7.0" />
   </ItemGroup>

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+using Microsoft.AspNetCore.Http;
 using Opserver.Controllers;
 
 namespace Opserver.Helpers
@@ -40,8 +41,8 @@ namespace Opserver.Helpers
         {
             var allTabs = new List<NavTab>();
             var mappings = new Dictionary<Type, NavTab>();
-            var moduleControllerTypes = Assembly.GetExecutingAssembly().GetTypes()
-                .Where(t => t.BaseType.IsGenericType);
+            var moduleControllerTypes = Assembly.GetEntryAssembly().GetTypes()
+                .Where(t => t.BaseType?.IsGenericType ?? false);
 
             foreach (var controllerType in moduleControllerTypes)
             {
